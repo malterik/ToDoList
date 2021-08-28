@@ -10,20 +10,20 @@ namespace po = boost::program_options;
 
 class Config {
  public:
-  Config(const string file_dir);
+  Config(const string data_dir);
   Config();
-  string file_dir;
+  string data_dir;
 };
 
-Config::Config(const string file_dir) : file_dir(file_dir) {}
+Config::Config(const string data_dir) : data_dir(data_dir) {}
 
-Config::Config() : file_dir() {}
+Config::Config() : data_dir() {}
 
 int arg_parse(int argc, char* argv[], Config& config) {
   try {
     po::options_description desc("Allowed options");
     desc.add_options()("help", "produce help message")(
-        "file-dir", po::value<string>(), "set directory to save tasks");
+        "data-dir", po::value<string>(), "set directory to save tasks");
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -34,9 +34,9 @@ int arg_parse(int argc, char* argv[], Config& config) {
       return 0;
     }
 
-    if (vm.count("file-dir")) {
-      config.file_dir = vm["file-dir"].as<string>();
-      cout << "File directory is set to " << config.file_dir << ".\n";
+    if (vm.count("data-dir")) {
+      config.data_dir = vm["data-dir"].as<string>();
+      cout << "File directory is set to " << config.data_dir << ".\n";
     } else {
       cout << "File directory was not set\n";
       return 1;

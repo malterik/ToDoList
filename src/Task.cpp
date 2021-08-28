@@ -35,9 +35,9 @@ string Task::toJson() {
   return json_content;
 }
 
-void Task::writeToFile(const string& files_path) {
+void Task::writeToFile(const string& data_dir) {
   ofstream json_file;
-  json_file.open((files_path + name_ + ".task").c_str());
+  json_file.open((data_dir + name_ + ".task").c_str());
   json_file << json_content;
   json_file.close();
 }
