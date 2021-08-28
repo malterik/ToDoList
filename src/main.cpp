@@ -6,6 +6,8 @@
 #include <iterator>
 
 #include "Task.hpp"
+#include "TaskManager.hpp"
+
 namespace po = boost::program_options;
 
 class Config {
@@ -50,15 +52,17 @@ int arg_parse(int argc, char* argv[], Config& config) {
   return 0;
 }
 
+/* Task t = Task("Test", 3); */
+/* Task t2 = Task(); */
+/* t2.fromFile("tests/Prepare Interview.task"); */
+
 int main(int argc, char* argv[]) {
   Config c;
+  TaskManager tm;
   if (arg_parse(argc, argv, c)) {
     return 1;
   }
-  Task t = Task("Test", 3);
-  Task t2 = Task();
-  t2.fromFile("tests/Prepare Interview.task");
-  std::cout << "name: " << t2.get_name() << " prio: " << t2.get_priority()
-            << std::endl;
+  tm.parseTasks(c.data_dir);
+
   return 0;
 }
