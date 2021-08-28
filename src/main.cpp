@@ -56,5 +56,9 @@ int main(int argc, char* argv[]) {
     return 1;
   }
   Task t = Task("Test", 3);
+  Task t2 = Task();
+  t2.fromFile("tests/Prepare Interview.task");
+  std::cout << "name: " << t2.get_name() << " prio: " << t2.get_priority()
+            << std::endl;
   return 0;
 }

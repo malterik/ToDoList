@@ -6,13 +6,14 @@ using namespace std;
 class Task : Serializer {
  public:
   Task(string name, int priority);
-  ~Task();
+  Task();
 
   string get_name();
   int get_priority();
 
   string toJson();
   void writeToFile(const string& files_path);
+  void fromFile(const string& files_path);
 
  private:
   string name_;
