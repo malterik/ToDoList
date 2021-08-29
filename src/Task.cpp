@@ -77,7 +77,7 @@ void Task::fromFile(const string& file_path) {
   }
   if (document.HasMember("state")) {
     if (document["state"].IsUint()) {
-      priority_ = document["state"].GetUint();
+      state_ = static_cast<TaskState>(document["state"].GetUint());
     }
   } else {
     std::cout << "Field \"state\" is not set" << std::endl;
@@ -85,5 +85,7 @@ void Task::fromFile(const string& file_path) {
 }
 
 void Task::print() const {
-  std::cout << "name: " << name_ << " priority: " << priority_ << std::endl;
+  std::cout << "name: " << name_ << "\t"
+            << " priority: " << priority_ << "\t"
+            << "state: " << state_ << std::endl;
 }
