@@ -74,3 +74,6 @@ void Task::fromFile(const string& file_path) {
   }
 }
 
+void Task::print() const {
+  std::cout << "name: " << name_ << " priority: " << priority_ << std::endl;
+}

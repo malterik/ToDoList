@@ -12,6 +12,7 @@ class Task : Serializer {
 
   string get_name() const;
   int get_priority() const;
+  void print() const;
 
   string toJson();
   void writeToFile(const string& files_path) const;
