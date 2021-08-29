@@ -7,6 +7,11 @@ using namespace std::literals;
 
 namespace fs = std::experimental::filesystem;
 
+TaskManager& TaskManager::getInstance() {
+  static TaskManager tm;
+  return tm;
+}
+
 TaskManager::TaskManager() : task_vec_() {}
 
 void TaskManager::parseTasks(const string& data_dir) {
