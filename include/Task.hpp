@@ -4,6 +4,8 @@
 #include "Serializer.hpp"
 using namespace std;
 
+enum TaskState { TO_DO, IN_WORK, DONE };
+
 class Task : Serializer {
  public:
   Task(string name, int priority);
@@ -21,5 +23,6 @@ class Task : Serializer {
  private:
   string name_;
   int priority_;
+  TaskState state_;
 };
 

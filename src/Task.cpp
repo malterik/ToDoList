@@ -12,13 +12,14 @@
 using namespace rapidjson;
 using namespace std;
 
-Task::Task(string name, int priority) : name_(name), priority_(priority) {
+Task::Task(string name, int priority)
+    : name_(name), priority_(priority), state_(TaskState::TO_DO) {
   std::cout << "name: " << name_ << " prio: " << priority_ << std::endl;
 }
 
 Task::Task(const string& filename) { fromFile(filename); }
 
-Task::Task() : name_(), priority_() {}
+Task::Task() : name_(), priority_(), state_(TaskState::TO_DO) {}
 
 string Task::get_name() const { return name_; }
 
@@ -32,6 +33,8 @@ string Task::toJson() {
   writer.String(name_.c_str());
   writer.Key("priority");
   writer.Uint(priority_);
+  writer.Key("state");
+  writer.Uint(state_);
   writer.EndObject();
   json_content = s.GetString();
   return json_content;
@@ -71,6 +74,13 @@ void Task::fromFile(const string& file_path) {
     }
   } else {
     std::cout << "Field \"priority\" is not set" << std::endl;
+  }
+  if (document.HasMember("state")) {
+    if (document["state"].IsUint()) {
+      priority_ = document["state"].GetUint();
+    }
+  } else {
+    std::cout << "Field \"state\" is not set" << std::endl;
   }
 }
 
