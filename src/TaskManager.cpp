@@ -23,3 +23,10 @@ void TaskManager::parseTasks(const string& data_dir) {
     }
   }
 }
+
+void TaskManager::printTasks() const {
+  for (int i = 0; i < task_vec_.size(); i++) {
+    std::cout << i << " ";
+    task_vec_[i].print();
+  }
+}
