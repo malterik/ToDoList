@@ -16,11 +16,13 @@ Task::Task(string name, int priority) : name_(name), priority_(priority) {
   std::cout << "name: " << name_ << " prio: " << priority_ << std::endl;
 }
 
+Task::Task(const string& filename) { fromFile(filename); }
+
 Task::Task() : name_(), priority_() {}
 
-string Task::get_name() { return name_; }
+string Task::get_name() const { return name_; }
 
-int Task::get_priority() { return priority_; }
+int Task::get_priority() const { return priority_; }
 
 string Task::toJson() {
   StringBuffer s;
@@ -35,7 +37,7 @@ string Task::toJson() {
   return json_content;
 }
 
-void Task::writeToFile(const string& data_dir) {
+void Task::writeToFile(const string& data_dir) const {
   ofstream json_file;
   json_file.open((data_dir + name_ + ".task").c_str());
   json_file << json_content;

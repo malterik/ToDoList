@@ -10,10 +10,11 @@ namespace fs = std::experimental::filesystem;
 TaskManager::TaskManager() : task_vec_() {}
 
 void TaskManager::parseTasks(const string& data_dir) {
-  std::vector<string> file_list;
   for (const auto& entry : fs::directory_iterator(data_dir)) {
-    /* std::cout << std::experimental::string_view(entry.path().string()) */
-    /*                  .ends_with(".task") */
-    /*           << std::endl; */
+    auto filename = entry.path().string();
+    // check if the file has the .task appendix
+    if (!filename.substr(filename.size() - 5).compare(".task")) {
+      task_vec_.emplace_back(filename);
+    }
   }
 }

@@ -52,10 +52,6 @@ int arg_parse(int argc, char* argv[], Config& config) {
   return 0;
 }
 
-/* Task t = Task("Test", 3); */
-/* Task t2 = Task(); */
-/* t2.fromFile("tests/Prepare Interview.task"); */
-
 int main(int argc, char* argv[]) {
   Config c;
   TaskManager tm;
