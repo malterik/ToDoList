@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 2.8.9)
 project (interview)
-add_executable(main src/main.cpp src/Task.cpp src/TaskManager.cpp src/Config.cpp)
+add_executable(
+    main 
+    src/main.cpp 
+    src/Task.cpp 
+    src/TaskManager.cpp
+    src/Config.cpp 
+)
 include_directories(include)
 set (CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

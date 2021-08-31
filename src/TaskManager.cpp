@@ -30,3 +30,21 @@ void TaskManager::printTasks() const {
     task_vec_[i].print();
   }
 }
+
+void TaskManager::addTask(const Task& task) { task_vec_.push_back(task); }
+
+void TaskManager::createTaskDialog() {
+  string name;
+  int prio;
+  std::cout << "Enter name of Task: ";
+  getline(cin, name);
+  std::cout << "Enter priority of Task: ";
+  cin >> prio;
+  task_vec_.emplace_back(name, prio);
+}
+
+void TaskManager::saveTasks(const string& data_dir) const {
+  for (const auto& task : task_vec_) {
+    task.writeToFile(data_dir);
+  }
+}

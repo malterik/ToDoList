@@ -13,9 +13,7 @@ using namespace rapidjson;
 using namespace std;
 
 Task::Task(string name, int priority)
-    : name_(name), priority_(priority), state_(TaskState::TO_DO) {
-  std::cout << "name: " << name_ << " prio: " << priority_ << std::endl;
-}
+    : name_(name), priority_(priority), state_(TaskState::TO_DO) {}
 
 Task::Task(const string& filename) { fromFile(filename); }
 
@@ -25,7 +23,7 @@ string Task::get_name() const { return name_; }
 
 int Task::get_priority() const { return priority_; }
 
-string Task::toJson() {
+string Task::toJson() const {
   StringBuffer s;
   Writer<StringBuffer> writer(s);
   writer.StartObject();
@@ -36,14 +34,13 @@ string Task::toJson() {
   writer.Key("state");
   writer.Uint(state_);
   writer.EndObject();
-  json_content = s.GetString();
-  return json_content;
+  return s.GetString();
 }
 
 void Task::writeToFile(const string& data_dir) const {
   ofstream json_file;
-  json_file.open((data_dir + name_ + ".task").c_str());
-  json_file << json_content;
+  json_file.open((data_dir + "/" + name_ + ".task").c_str());
+  json_file << toJson();
   json_file.close();
 }
 

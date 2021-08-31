@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-enum class Mode { CREATE_TASK, PRINT_ALL };
+enum class Mode { NONE, CREATE_TASK, PRINT_ALL };
 
 class Config {
  public:
@@ -11,5 +11,5 @@ class Config {
   Config(int argc, char* argv[]);
   Config();
   string data_dir;
-  Mode mode;
+	Mode mode;
 };
