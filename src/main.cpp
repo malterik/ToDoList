@@ -13,10 +13,12 @@ int main(int argc, char* argv[]) {
   switch (c.mode) {
     case Mode::CREATE_TASK:
       tm.createTaskDialog();
-      tm.printTasks();
       break;
     case Mode::PRINT_ALL:
       tm.printTasks();
+      break;
+    case Mode::EDIT_STATE:
+      tm.editStateDialog(c.task_to_edit);
       break;
     default:
       std::cout << "Unknown operation!" << std::endl;

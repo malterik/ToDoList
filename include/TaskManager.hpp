@@ -12,6 +12,7 @@ class TaskManager {
   void saveTasks(const string& data_dir) const;
   void addTask(const Task& task);
   void createTaskDialog();
+  void editStateDialog(const int index);
 
  private:
   TaskManager();

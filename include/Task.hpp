@@ -14,6 +14,12 @@ class Task : Serializer {
 
   string get_name() const;
   int get_priority() const;
+  TaskState get_state() const;
+
+  void set_name(const string name);
+  void set_priority(const int prio);
+  void set_state(const TaskState state);
+
   void print() const;
 
   string toJson() const;

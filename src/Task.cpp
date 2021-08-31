@@ -23,6 +23,14 @@ string Task::get_name() const { return name_; }
 
 int Task::get_priority() const { return priority_; }
 
+TaskState Task::get_state() const { return state_; }
+
+void Task::set_name(const string name) { name_ = name; }
+
+void Task::set_priority(const int prio) { priority_ = prio; }
+
+void Task::set_state(const TaskState state) { state_ = state; }
+
 string Task::toJson() const {
   StringBuffer s;
   Writer<StringBuffer> writer(s);

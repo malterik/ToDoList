@@ -49,6 +49,16 @@ void TaskManager::createTaskDialog() {
   task_vec_.emplace_back(name, prio);
 }
 
+void TaskManager::editStateDialog(const int index) {
+  int state;
+  std::cout << "0: TO_DO" << std::endl
+            << "1: IN_WORK" << std::endl
+            << "2: DONE" << std::endl;
+  std::cout << "Enter new state: ";
+  cin >> state;
+  task_vec_[index].set_state(static_cast<TaskState>(state));
+}
+
 void TaskManager::saveTasks(const string& data_dir) const {
   for (const auto& task : task_vec_) {
     task.writeToFile(data_dir);

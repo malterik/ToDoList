@@ -13,7 +13,8 @@ Config::Config(int argc, char* argv[]) {
       ("help", "produce help message")
       ("data-dir", po::value<string>(), "set directory to save tasks")
       ("create-task", "Start dialog to create a task")
-      ("print-tasks", "Print a lists of all tasks");
+      ("print-tasks", "Print a lists of all tasks")
+      ("edit-state", po::value<int>(), "Edit the state of the task");
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -31,9 +32,10 @@ Config::Config(int argc, char* argv[]) {
 
     if (vm.count("create-task")) {
       mode = Mode::CREATE_TASK;
-    }
-
-    if (vm.count("print-tasks")) {
+    } else if (vm.count("edit-state")) {
+      mode = Mode::EDIT_STATE;
+      task_to_edit = vm["edit-state"].as<int>();
+    } else if (vm.count("print-tasks")) {
       mode = Mode::PRINT_ALL;
     }
 
@@ -44,7 +46,7 @@ Config::Config(int argc, char* argv[]) {
   }
 }
 
-Config::Config(const string data_dir) : data_dir(data_dir), mode(Mode::NONE)  {}
+Config::Config(const string data_dir) : data_dir(data_dir), mode(Mode::NONE) {}
 
 Config::Config() : data_dir(), mode(Mode::NONE) {}
 
