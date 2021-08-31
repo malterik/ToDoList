@@ -19,6 +19,10 @@ bool sortTaskPrio(const Task& t1, const Task& t2) {
   return t1.get_priority() > t2.get_priority();
 }
 
+bool sortTaskState(const Task& t1, const Task& t2) {
+  return t1.get_state() < t2.get_state();
+}
+
 void TaskManager::parseTasks(const string& data_dir) {
   for (const auto& entry : fs::directory_iterator(data_dir)) {
     auto filename = entry.path().string();
@@ -28,6 +32,7 @@ void TaskManager::parseTasks(const string& data_dir) {
     }
   }
   std::sort(task_vec_.begin(), task_vec_.end(), sortTaskPrio);
+  std::sort(task_vec_.begin(), task_vec_.end(), sortTaskState);
 }
 
 void TaskManager::printTasks() const {
