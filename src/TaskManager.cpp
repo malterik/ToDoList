@@ -1,5 +1,6 @@
 #include "TaskManager.hpp"
 
+#include <algorithm>
 #include <experimental/filesystem>
 #include <experimental/string_view>
 
@@ -14,6 +15,10 @@ TaskManager& TaskManager::getInstance() {
 
 TaskManager::TaskManager() : task_vec_() {}
 
+bool sortTaskPrio(const Task& t1, const Task& t2) {
+  return t1.get_priority() > t2.get_priority();
+}
+
 void TaskManager::parseTasks(const string& data_dir) {
   for (const auto& entry : fs::directory_iterator(data_dir)) {
     auto filename = entry.path().string();
@@ -22,6 +27,7 @@ void TaskManager::parseTasks(const string& data_dir) {
       task_vec_.emplace_back(filename);
     }
   }
+  std::sort(task_vec_.begin(), task_vec_.end(), sortTaskPrio);
 }
 
 void TaskManager::printTasks() const {
